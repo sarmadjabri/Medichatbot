@@ -1,0 +1,12 @@
+import nltk
+from nltk.corpus import brown
+
+# Load Brown corpus
+corpus = brown.words()
+
+# Tokenize and extract unique words
+words = set(w.lower() for w in corpus)
+
+# Save words to pickle file
+import pickle
+with open("words.pkl", "rb) as f

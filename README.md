@@ -1,2 +1,5 @@
 # Medichatbot
-medicinal chat bot to diagnose medicine accurately and to assist those who are unable to reach medical assistance. This device can take the users symptoms and give accurate dosages and what to do in their situation.
+Medichatbot is a nlp to converse with a patient to take the inputted diseases/symptoms the patient has to reccomend a certain workflow for the patient to recover. This will be useful for places all over the world where proper medicare is absent
+
+This takes the path of telecommunication
+

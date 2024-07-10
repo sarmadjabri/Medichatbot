@@ -1,0 +1,13 @@
+
+[
+  {"id": 0, "name": "Common Cold", "description": "A viral infection that affects the upper respiratory tract"},
+  {"id": 1, "name": "Flu", "description": "A contagious respiratory illness caused by the influenza virus"},
+  {"id": 2, "name": "Allergies", "description": "An overreaction of the immune system to a foreign substance"},
+  {"id": 3, "name": "Asthma", "description": "A chronic inflammatory disease that affects the airways"},
+  {"id": 4, "name": "Bronchitis", "description": "An inflammation of the bronchial tubes that carry air to and from the lungs"},
+  {"id": 5, "name": "Pneumonia", "description": "An infection that inflames the air sacs in the lungs"},
+  {"id": 6, "name": "Tuberculosis", "description": "A bacterial infection that primarily affects the lungs"},
+  {"id": 7, "name": "Hypertension", "description": "High blood pressure that can lead to heart disease and stroke"},
+  {"id": 8, "name": "Diabetes", "description": "A metabolic disorder that affects blood sugar levels"},
+  {"id": 9, "name": "Arthritis", "description": "A condition that causes inflammation and pain in the joints"}
+ ]

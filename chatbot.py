@@ -1,17 +1,12 @@
-
 import json
 import nltk
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.models import load_model
+from tensorflow.keras import models
 import numpy as np
 import pickle
-import tensorflow as tf
-
-print(tf.__version__)
-
 # Load disease database and za model
 diseases = json.load(open("diseases.json"))
-model = load_model("disease_model.h5")
+model = models.load_model("(disease_model).h5")
 
 # Load words list
 with open("words.pkl", "rb") as f:

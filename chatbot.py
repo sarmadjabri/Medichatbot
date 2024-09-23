@@ -12,26 +12,26 @@ diseases = json.load(open("diseases.json"))
 with open("words.pkl", "rb") as f:
     words = pickle.load(f)
 
-# Initialize lemmatize
+# Initialize lemmatize for breaking down words
 lemmatizer = WordNetLemmatizer()
 
 # Download required NLTK data
 nltk.download('punkt')
 nltk.download('wordnet')
 
-# Define a function to process user input
+#Fix the sentece words later Define a function to process user input
 def process_symptoms(text):
     # Tokenize and lemmatize user input
     sentence_words = nltk.tokenize.regexp.word_tokenize(text, preserve_case=False)
     sentence_words = nltk.tokenize.treebank.TreebankWordTokenizer().tokenize(text)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
 
-    # Remove stop words
+    # Remove stop words need to add on more
     stop_words = set(nltk.corpus.stopwords.words('english'))
     sentence_words = [word for word in sentence_words if word not in stop_words]
 
-    # Convert user input into a numerical representation
-    sequence_length = 50
+    # Convert user input into a numerical representation(limit may vary)
+    sequence_length = 100
     padded_sequence = np.zeros((sequence_length,))
     for i, word in enumerate(sentence_words):
         if i >= sequence_length:
@@ -39,7 +39,7 @@ def process_symptoms(text):
         if word in words:
             padded_sequence[i] = words.index(word)
 
-    # Use LSTM model to predict possible diseases
+    # Use LSTM model to predict possible diseases(need to check up on this)
     model = models.Sequential([
         layers.Embedding(input_dim=len(words), output_dim=128, input_length=sequence_length),
         layers.LSTM(64),

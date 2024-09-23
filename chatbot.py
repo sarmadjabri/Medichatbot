@@ -1,12 +1,12 @@
 import json
 import nltk
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras import models
+from tensorflow.keras import models, layers
 import numpy as np
 import pickle
+
 # Load disease database and za model
 diseases = json.load(open("diseases.json"))
-model = models.load_model("(disease_model).h5")
 
 # Load words list
 with open("words.pkl", "rb") as f:
@@ -22,19 +22,31 @@ nltk.download('wordnet')
 # Define a function to process user input
 def process_symptoms(text):
     # Tokenize and lemmatize user input
-    sentence_words = nltk.word_tokenize(text)
+    sentence_words = nltk.tokenize.regexp.word_tokenize(text, preserve_case=False)
+    sentence_words = nltk.tokenize.treebank.TreebankWordTokenizer().tokenize(text)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
 
-    # Convert user input into a numerical representation
-    bag = [0] * len(words)
-    for w in sentence_words:
-        for i, word in enumerate(words):
-            if word == w:
-                bag[i] = 1
+    # Remove stop words
+    stop_words = set(nltk.corpus.stopwords.words('english'))
+    sentence_words = [word for word in sentence_words if word not in stop_words]
 
-    # Use machine learning model to predict possible diseases
-    bow = np.array([bag])
-    res = model.predict(bow)[0]
+    # Convert user input into a numerical representation
+    sequence_length = 50
+    padded_sequence = np.zeros((sequence_length,))
+    for i, word in enumerate(sentence_words):
+        if i >= sequence_length:
+            break
+        if word in words:
+            padded_sequence[i] = words.index(word)
+
+    # Use LSTM model to predict possible diseases
+    model = models.Sequential([
+        layers.Embedding(input_dim=len(words), output_dim=128, input_length=sequence_length),
+        layers.LSTM(64),
+        layers.Dense(len(diseases), activation='softmax')
+    ])
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    res = model.predict(np.array([padded_sequence]))[0]
     ERROR_THRESHOLD = 0.25
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
     results.sort(key=lambda x: x[1], reverse=True)
@@ -53,3 +65,4 @@ while True:
     print("It is possible you have:")
     for disease in possible_diseases:
         print(f"{disease['disease']} with a probability of {disease['probability']}")
+

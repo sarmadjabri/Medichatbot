@@ -3,3 +3,10 @@ Medichatbot is a nlp to converse with a patient to take the inputted diseases/sy
 
 This takes the path of telecommunication
 
+There are numerous websites that were used to make this such as the following:
+
+https://github.com/nltk/nltk
+https://keras.io/api/layers/recurrent_layers/lstm/
+https://numpy.org/doc/
+https://keras.io/about/
+https://github.com/tensorflow/tensorflow

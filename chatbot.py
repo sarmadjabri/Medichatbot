@@ -5,32 +5,40 @@ from tensorflow.keras import models, layers
 import numpy as np
 import pickle
 
-# Load disease database and za model
+# Load disease database and model
 diseases = json.load(open("diseases.json"))
 
 # Load words list
 with open("words.pkl", "rb") as f:
     words = pickle.load(f)
 
-# Initialize lemmatize for breaking down words
+# Initialize lemmatizer for breaking down words
 lemmatizer = WordNetLemmatizer()
 
 # Download required NLTK data
 nltk.download('punkt')
 nltk.download('wordnet')
 
-#Fix the sentece words later Define a function to process user input
 def process_symptoms(text):
+    """
+    Process user input symptoms and predict possible diseases.
+
+    Args:
+        text (str): User input symptoms.
+
+    Returns:
+        list: A list of possible diseases with their probabilities.
+    """
     # Tokenize and lemmatize user input
     sentence_words = nltk.tokenize.regexp.word_tokenize(text, preserve_case=False)
     sentence_words = nltk.tokenize.treebank.TreebankWordTokenizer().tokenize(text)
     sentence_words = [lemmatizer.lemmatize(word) for word in sentence_words]
 
-    # Remove stop words need to add on more
+    # Remove stop words
     stop_words = set(nltk.corpus.stopwords.words('english'))
     sentence_words = [word for word in sentence_words if word not in stop_words]
 
-    # Convert user input into a numerical representation(limit may vary)
+    # Convert user input into a numerical representation
     sequence_length = 100
     padded_sequence = np.zeros((sequence_length,))
     for i, word in enumerate(sentence_words):
@@ -39,7 +47,7 @@ def process_symptoms(text):
         if word in words:
             padded_sequence[i] = words.index(word)
 
-    # Use LSTM model to predict possible diseases(need to check up on this)
+    # Use LSTM model to predict possible diseases
     model = models.Sequential([
         layers.Embedding(input_dim=len(words), output_dim=128, input_length=sequence_length),
         layers.LSTM(64),

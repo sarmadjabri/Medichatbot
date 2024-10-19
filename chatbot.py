@@ -6,7 +6,12 @@ from nltk.stem import WordNetLemmatizer
 from tensorflow.keras import models, layers
 
 # Define a list of diseases
-diseases = [{"name": "Flu"}, {"name": "Cold"}, {"name": "COVID-19"}]  # Example list
+diseases = [
+    {"name": "Flu"},
+    {"name": "Cold"},
+    {"name": "COVID-19"},
+    # Add more diseases as needed
+]
 
 # Load words list
 with open("words.pkl", "rb") as f:
@@ -14,9 +19,9 @@ with open("words.pkl", "rb") as f:
 
 # Initialize lemmatizer and download required NLTK data
 lemmatizer = WordNetLemmatizer()
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('stopwords')
+nltk.download('punkt', quiet=True)
+nltk.download('wordnet', quiet=True)
+nltk.download('stopwords', quiet=True)
 
 # Define constants
 ERROR_THRESHOLD = 0.25
@@ -34,9 +39,17 @@ def load_model():
 
 def preprocess_input(text):
     """Tokenize and lemmatize the input text, removing stopwords."""
+    # Tokenize the input
     tokens = nltk.word_tokenize(text.lower())
-    lemmatized_words = [lemmatizer.lemmatize(word) for word in tokens if word.isalnum()]
+    
+    # Lemmatize and filter out non-alphanumeric tokens
+    lemmatized_words = [
+        lemmatizer.lemmatize(word) 
+        for word in tokens 
+        if word.isalnum()
+    ]
 
+    # Remove stopwords
     stop_words = set(nltk.corpus.stopwords.words('english'))
     return [word for word in lemmatized_words if word not in stop_words]
 
@@ -92,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -5,6 +5,9 @@ import pickle
 from nltk.stem import WordNetLemmatizer
 from tensorflow.keras import models, layers
 
+nltk.download()
+
+
 # Define a list of diseases
 diseases = [
     {"name": "Flu"},

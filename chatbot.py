@@ -77,9 +77,9 @@ def predict_diseases(model, padded_sequence):
 def main():
     """Main function to run the chatbot."""
     model = load_model()
-    print("🌟 Welcome to the Disease Prediction Chatbot! 🌟")
-    print("🤖 I'm here to help you. Just type your symptoms, and I'll do my best to assist you.")
-    print("💬 Type 'exit' anytime to end the conversation.\n")
+    print(" Welcome to the Disease Prediction Chatbot! ")
+    print(" I'm here to help you. Just type your symptoms, and I'll do my best to assist you.")
+    print(" Type 'exit' anytime to end the conversation.\n")
 
     while True:
         user_input = input("🔍 Enter your symptoms: ")

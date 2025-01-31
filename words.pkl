@@ -1,5 +1,8 @@
 import nltk
 from nltk.corpus import brown
+import pickle
+
+nltk.download('brown')
 
 # Load Brown corpus
 corpus = brown.words()
@@ -8,5 +11,5 @@ corpus = brown.words()
 words = set(w.lower() for w in corpus)
 
 # Save words to pickle file
-import pickle
-with open("words.pkl", "rb) as f
+with open("words.pkl", "wb") as f:
+    pickle.dump(list(words), f)

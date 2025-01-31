@@ -1,0 +1,54 @@
+{
+  "intents": [
+    {
+      "tag": "symptom_check",
+      "patterns": [
+        "I have a fever and a headache",
+        "I have a cough and a sore throat",
+        "I'm feeling tired and have body aches",
+        "I have chills and muscle pain"
+      ],
+      "responses": [
+        "Let me check the symptoms for you.",
+        "I'll do my best to help you with that."
+      ]
+    },
+    {
+      "tag": "greeting",
+      "patterns": [
+        "Hello",
+        "Hi",
+        "Hey",
+        "Greetings"
+      ],
+      "responses": [
+        "Hello! How can I assist you today?",
+        "Hi there! What symptoms are you experiencing today?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "Bye",
+        "Goodbye",
+        "See you",
+        "Take care"
+      ],
+      "responses": [
+        "Goodbye! Take care!",
+        "Thank you for chatting! Stay healthy."
+      ]
+    },
+    {
+      "tag": "feedback",
+      "patterns": [
+        "Was this helpful?",
+        "Do you think this was useful?",
+        "Can you improve?"
+      ],
+      "responses": [
+        "Thank you for your feedback! We'll use it to improve the system."
+      ]
+    }
+  ]
+}
